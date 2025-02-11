@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 750px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#a1c9f4", "font": {"color": "white"}, "id": 1, "label": "Greg Kirczenow", "shape": "dot", "title": "Swim, bike, run", "value": 100, "x": 15.449984550476074, "y": 25.169397354125977}, {"color": "#ffb482", "font": {"color": "white"}, "id": 2, "label": "Nikita Neveditsin", "shape": "dot", "title": "I like hiking, swimming, traveling, enjoying nice weather and sun (and h.a.t.e winters!)", "value": 100, "x": 14.84467601776123, "y": 26.258319854736328}, {"color": "#8de5a1", "font": {"color": "white"}, "id": 3, "label": "Pawan Lingras", "shape": "dot", "title": "I do not know what I like, but I travel, swim, run, bike obsessively", "value": 100, "x": 14.848204612731934, "y": 25.248563766479492}, {"color": "#ff9f9b", "font": {"color": "white"}, "id": 4, "label": "Somto Muotoe", "shape": "dot", "title": "I enjoy reading, cycling, playing chess, and story-based video games (think Red Dead Redemption, Baldur\u0027s Gate, GTA).", "value": 100, "x": 17.782014846801758, "y": 25.377063751220703}, {"color": "#d0bbff", "font": {"color": "white"}, "id": 5, "label": "Mohamed Drira", "shape": "dot", "title": "I\u00e2\u20ac\u2122m passionate about hiking, reading, meditation, movies, and embracing new challenges", "value": 100, "x": 15.094420433044434, "y": 25.796497344970703}, {"color": "#debb9b", "font": {"color": "white"}, "id": 6, "label": "Ethan Cooke", "shape": "dot", "title": "I like spending my time hiking, and playing various kinds of board games and video games.", "value": 100, "x": 15.191882133483887, "y": 24.599605560302734}, {"color": "#fab0e4", "font": {"color": "white"}, "id": 7, "label": "Sudeep Raj Badal", "shape": "dot", "title": "I like listening to music, reading, going on long drives and watching movies.", "value": 100, "x": 15.669404983520508, "y": 26.296350479125977}, {"color": "#cfcfcf", "font": {"color": "white"}, "id": 8, "label": "Justin Kaiser", "shape": "dot", "title": "I enjoy playing video games with my brother who lives in New Brunswick!", "value": 100, "x": 17.464611053466797, "y": 24.769733428955078}, {"color": "#fffea3", "font": {"color": "white"}, "id": 9, "label": "Yaxuan Zhang", "shape": "dot", "title": "I enjoy detective series, Japanese anime, game(fgo, Baldur\u0027s Gate)  sleep", "value": 100, "x": 17.43635368347168, "y": 25.961776733398438}, {"color": "#b9f2f0", "font": {"color": "white"}, "id": 10, "label": "Sai Vishnu Teja Reddy Pulim", "shape": "dot", "title": "I like to watch anime, movies, play badminton, video games and love to read about physics", "value": 100, "x": 16.248733520507812, "y": 26.481853485107422}, {"color": "#a1c9f4", "font": {"color": "white"}, "id": 11, "label": "Max Zhao", "shape": "dot", "title": "I love sports and enjoy exploring all kinds of AI models", "value": 100, "x": 16.178659439086914, "y": 24.1791934967041}, {"color": "#ffb482", "font": {"color": "white"}, "id": 12, "label": "Karthikeya Kanumuri", "shape": "dot", "title": "I like watching movies and web series. I love watching sports(cricket, F1) and mainly I like the planning behind the process more like strategy thing.", "value": 100, "x": 16.86435317993164, "y": 26.431127548217773}, {"color": "#8de5a1", "font": {"color": "white"}, "id": 13, "label": "Mohammed Abdul Thoufiq", "shape": "dot", "title": "I like watching movies, playing cricket, efootball and collecting sneakers", "value": 100, "x": 16.573726654052734, "y": 25.747779846191406}, {"color": "#ff9f9b", "font": {"color": "white"}, "id": 14, "label": "SicongFu", "shape": "dot", "title": "Basketball, Game, Movie", "value": 100, "x": 16.52092933654785, "y": 24.790454864501953}, {"color": "#d0bbff", "font": {"color": "white"}, "id": 15, "label": "Louise Fear", "shape": "dot", "title": "I like reading, playing video games, and baking.", "value": 100, "x": 15.94412899017334, "y": 25.51630973815918}, {"color": "#debb9b", "font": {"color": "white"}, "id": 16, "label": "Sukanta Dey Amit", "shape": "dot", "title": "I love watching movie, reading novels and playing cricket.", "value": 100, "x": 15.991405487060547, "y": 27.041292190551758}, {"color": "#fab0e4", "font": {"color": "white"}, "id": 17, "label": "Kedar Gaikwad", "shape": "dot", "title": "I enjoy playing video games {Marvel Rivals} recently, also love to leverage technology to help people", "value": 100, "x": 17.160778045654297, "y": 25.21331787109375}, {"color": "#cfcfcf", "font": {"color": "white"}, "id": 18, "label": "Anuja Gamage", "shape": "dot", "title": "I like playing MMOs and experimenting with new AI models", "value": 100, "x": 16.916919708251953, "y": 24.050796508789062}, {"color": "#fffea3", "font": {"color": "white"}, "id": 19, "label": "Sriram Ramesh", "shape": "dot", "title": "I like Competitive coding, playing soccer, ping pong and pool", "value": 100, "x": 17.241849899291992, "y": 26.82439613342285}]);
+                  edges = new vis.DataSet([]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
