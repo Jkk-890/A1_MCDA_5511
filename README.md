@@ -1,1 +1,12 @@
 # A1_MCDA_5511
+To get the code to run you must
+
+1. Run "uv sync"
+2. Select the python "3.10.16" kernal
+3. Run .venv\Scripts\Activate
+4. Run .venv\Scripts\python.exe -m ensurepip --upgrade
+5. Run .venv\Scripts\python.exe -m pip install ipykernel
+
+After completing these steps teh code should run fine
+
+Note: The code is not fully functional yet
