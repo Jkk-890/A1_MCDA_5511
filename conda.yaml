@@ -1,0 +1,7 @@
+name: sentence-transformers-env
+dependencies:
+  - python=3.8
+  - pip:
+    - sentence-transformers
+    - scikit-learn
+    - numpy
