@@ -41,3 +41,11 @@ vector. For instance, the sentences "I went for a run" and "I enjoy running"
 would have similar vectors because they express related ideas. However, "I 
 went for a run" and "My eyes hurt a lot" would have very different vectors 
 since they convey unrelated concepts.
+
+# Data Analysis (part_2):
+In this section, changes were made to the input data to see their impact on the
+corresponding embeddings. This was done by creating 3 new versions of the input data,
+and modifying each entry in some common way. These included a file for synonyms, one
+for antonyms, and one for rephrasing. 
+
+The modified embeddings were compared using the cosine similarity function.
