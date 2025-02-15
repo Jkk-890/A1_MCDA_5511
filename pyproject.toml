@@ -1,8 +1,11 @@
 [project]
-name = "A1"
+name = "a1-mcda-5511"
 version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
 dependencies = [
-    "umap-learn",
+"umap-learn",
     "scipy",
     "scikit-learn",
     "sentence-transformers",
@@ -12,5 +15,8 @@ dependencies = [
     "seaborn",
     "branca",
     "pandas",
-    "numba>=0.56.4"  # Ensure a compatible version
+    "numba>=0.56.4" 
+
+
+
 ]
