@@ -79,7 +79,7 @@ embedding to a significant degree.
 ### README
 
 For this assignment, I approached the task in an organizational-level fashion by adopting Agile methodologies. I created a sprint and a Kanban board to track progress and deliverables. The goal was to compare four models for embedding generation and send the output via email.
-![img.png](img/img.png)
+![img.png](https://github.com/Jkk-890/A1_MCDA_5511/blob/Embedding_Sensitivity_Tests/img/img.png)
 Initially, I considered using **Azure Function App** for the task automation. However, due to its high resource consumption, it wasn't a viable solution. I then explored **Azure ML Studio** by creating a compute instance, but it proved to be too costly and less powerful compared to my local setup. 
 ![img_1.png](img/img_1.png)  ![img_3.png](img/img_3.png) ![img_4.png](img/img_4.png)  ![img_6.png](img/img_6.png)
 Next, I looked into using **Hugging Face API endpoints**, but I preferred staying within the Azure ecosystem for better integration with Azure Blob Storage, where I was storing input/output logs and embeddings. I created a custom **Docker container** for deployment but encountered permission errors. 
