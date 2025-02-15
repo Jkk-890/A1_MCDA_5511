@@ -49,3 +49,24 @@ and modifying each entry in some common way. These included a file for synonyms,
 for antonyms, and one for rephrasing. 
 
 The modified embeddings were compared using the cosine similarity function.
+The smallest change (average cosine similarity of ~0.965) in the embeddings happened 
+when a word was chosen from the sentence and replaced with a synonym. 
+This makes sense since changing a word with its synonym both retains 
+the meaning of the sentence and the structure of the sentence itself.
+For instance, the sentence I enjoy cycling is near identical to the sentence I enjoy biking.
+
+Where the embeddings started to become drastically different was with the antonym 
+sentences. With this data set, one word was picked out and replaced with an 
+antonym. For instance, I love winter became I hate winter. This has a profound 
+effect on our embeddings, however not as much as one would think. I believe this 
+is because while the opinion on a subject matter may differ the subject stays the 
+same. while the previous sentences were opposites they were both talking about
+winter.
+
+The last set contained various rephrasings of the given data set. This had a 
+similar mean cosine similarity to the antonym set (~0.887), which was initially 
+surprising. After considering the results however, adding / changing a 
+significant amount of words in the sentence would naturally change the 
+embedding to a significant degree.
+
+![alt text](results.png)
